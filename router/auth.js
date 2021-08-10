@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const cookieParser = require('cookie-Parser');
-
 const authenticate = require('../middleware/authenticate');
 
 require('../db/conn');
