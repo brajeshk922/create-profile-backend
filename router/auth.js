@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
+const cookieParser = require('cookie-Parser');
+
 const authenticate = require('../middleware/authenticate');
 
 require('../db/conn');
@@ -60,10 +62,10 @@ router.post('/signin', async (req, res) => {
             const token = await userLogin.generateAuthToken();
             console.log(token);
 
-            // res.cookie("jwtoken", token, {
-            //     expires: new Date(Date.now() + 258920000),  
-            //     httpOnly: true
-            // })
+            res.cookie("jwtoken", token, {
+                expires: new Date(Date.now() + 258920000),  //expire after 30days
+                httpOnly: true
+            })
 
             if (!isMatch) {
                 res.status(400).json({ error: "invalid credentials" });
